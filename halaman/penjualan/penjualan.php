@@ -1,8 +1,11 @@
 <?php
 require "penjualanfunction.php";
+
 // require '../../cek.php';
 $q = mysqli_query($conn, "SELECT * FROM pelanggan");
 $barang = mysqli_query($conn, "SELECT * FROM stock");
+
+
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +23,7 @@ $barang = mysqli_query($conn, "SELECT * FROM stock");
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
@@ -169,32 +170,31 @@ $barang = mysqli_query($conn, "SELECT * FROM stock");
                             <div class="card shadow mb-4">
 
                                 <!-- tabel -->
-                                <form action="" method="POST" class="addform">
+                                <form action="" method="POST" class="addform" onsubmit="return validateForm()">
                                     <div class="form-container">
                                         <!-- Formulir Tambah Data -->
                                         <div class="form-group">
-                                            <label for="">Nama Pelanggan:</label>
+                                            <label for="pelanggan">Nama Pelanggan:</label>
                                             <select name="pelanggan" id="pelanggan">
-                                                <?php foreach ($q as $data): ?>
+                                                <option value="" disabled selected>Pilih pelanggan</option>
+                                                <?php foreach ($q as $data) : ?>
                                                     <option value="<?= $data['idpelanggan'] ?>">
                                                         <?= $data['namapelanggan'] ?>
                                                     </option>
-                                                <?php endforeach ?>
+                                                <?php endforeach; ?>
                                             </select>
                                         </div>
-
                                         <div class="form-group">
                                             <label for="barang">Barang Yang di beli:</label>
-                                            <select name="barang[]" id="barang">
-                                                <option value="Pilih barang">Pilih barang</option>
-                                                <?php foreach ($barang as $data): ?>
+                                            <select name="barang" id="barang">
+                                                <option value="" disabled selected>Pilih barang</option>
+                                                <?php foreach ($barang as $data) : ?>
                                                     <option value="<?= $data['idbarang'] ?>">
                                                         <?= $data['namabarang'] ?>
                                                     </option>
-                                                <?php endforeach ?>
+                                                <?php endforeach; ?>
                                             </select>
-                                            <button type="button" id="tambah_barang"
-                                                onclick="tambahDataDariInputan()">Tambah Barang</button>
+                                            <button type="button" id="tambah_barang" onclick="tambahDataDariInputan()">Tambah Barang</button>
                                         </div>
                                     </div>
                                     <div class="form-container">
@@ -248,8 +248,7 @@ $barang = mysqli_query($conn, "SELECT * FROM stock");
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -292,13 +291,13 @@ $barang = mysqli_query($conn, "SELECT * FROM stock");
                                     $namabarangnya = $fetcharray['namabarang'];
                                     $idbarangnya = $fetcharray['idbarang'];
 
-                                    ?>
+                                ?>
 
                                     <option value="<?= $idbarangnya; ?>">
                                         <?= $namabarangnya; ?>
                                     </option>
 
-                                    <?php
+                                <?php
                                 }
                                 ?>
 
@@ -307,13 +306,11 @@ $barang = mysqli_query($conn, "SELECT * FROM stock");
                         </div>
 
                         <div class="form-group">
-                            <input type="number" name="qty" id="qty" placeholder="Quantity" class="form-control"
-                                required>
+                            <input type="number" name="qty" id="qty" placeholder="Quantity" class="form-control" required>
                         </div>
 
                         <div class="form-group">
-                            <input type="text" name="penerima" id="penerima" placeholder="Penerima" class="form-control"
-                                required>
+                            <input type="text" name="penerima" id="penerima" placeholder="Penerima" class="form-control" required>
                         </div>
 
                         <div class="modal-footer">
@@ -345,50 +342,52 @@ $barang = mysqli_query($conn, "SELECT * FROM stock");
 
     <!-- js custom -->
     <script>
-        // Membuat fungsi untuk menambahkan data dari inputan ke dalam tabel
         var noUrut = 1;
-
 
         function tambahDataDariInputan() {
             var namaBarang = document.getElementById('barang');
-
-
-            // Pastikan elemen dengan id 'judulBarang' dapat diakses
             if (namaBarang) {
                 var selectedOption = namaBarang.options[namaBarang.selectedIndex];
-
-                // Pastikan opsi terpilih ada sebelum menambahkan data ke dalam tabel
-                if (selectedOption && selectedOption.value !== 'Pilih Barang') {
+                if (selectedOption && selectedOption.value !== 'Pilih barang') {
                     var selectedText = selectedOption.innerHTML;
-
-                    // Tambahkan Barang yang dipilih ke dalam tabel
+                    var selectedValue = selectedOption.value;
                     var tabel = document.getElementById('tabelData');
-                    var row = tabel.insertRow(-1);
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(1);
-                    var cell3 = row.insertCell(2);
-                    var cell4 = row.insertCell(3);
-                    cell1.innerHTML = noUrut;
-                    cell2.innerHTML = selectedText;
-                    cell3.innerHTML = '<input type="number" name="quantity[]" value="1" min="1" step="1">';
-                    cell4.innerHTML = "<input type='hidden' name='barang[]' value='" + selectedOption.value + "'>" +
-                        "<button type='button' onclick='hapusData(this)'>Hapus</button>";
+                    var barisBaru = tabel.insertRow();
+                    var selNomor = barisBaru.insertCell(0);
+                    var selBarang = barisBaru.insertCell(1);
+                    var selJumlah = barisBaru.insertCell(2);
+                    var selAksi = barisBaru.insertCell(3);
 
-                    // Bersihkan pemilihan untuk Barang berikutnya
-                    namaBarang.selectedIndex = 0;
+                    selNomor.innerHTML = noUrut;
+                    selBarang.innerHTML = selectedText + '<input type="hidden" name="barang[]" value="' + selectedValue + '">';
+                    selJumlah.innerHTML = '<input type="number" name="quantity[]" value="1" min="1">';
+                    selAksi.innerHTML = '<button type="button" onclick="hapusBaris(this)">Hapus</button>';
                     noUrut++;
                 } else {
-                    alert('Pilih Barang terlebih dahulu.');
+                    alert('Pilih barang terlebih dahulu.');
                 }
-            } else {
-                alert('Terjadi kesalahan dalam mengakses elemen Barang.');
             }
         }
 
-
-        function hapusData(button) {
-            var row = button.parentNode.parentNode;
+        function hapusBaris(baris) {
+            var row = baris.parentNode.parentNode;
             row.parentNode.removeChild(row);
+        }
+
+        function validateForm() {
+            var namaBarang = document.getElementById('barang');
+            var quantityInputs = document.getElementsByName('quantity[]');
+            if (!namaBarang || namaBarang.selectedIndex === 0) {
+                alert('Pilih barang terlebih dahulu.');
+                return false;
+            }
+            for (var i = 0; i < quantityInputs.length; i++) {
+                if (quantityInputs[i].value === '' || parseInt(quantityInputs[i].value) <= 0) {
+                    alert('Tentukan jumlah barang terlebih dahulu.');
+                    return false;
+                }
+            }
+            return true;
         }
     </script>
 </body>
