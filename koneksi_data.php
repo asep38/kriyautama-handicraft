@@ -1,5 +1,4 @@
 <?php
 session_start();
 // koneksi ke database
-$conn = mysqli_connect("localhost","root","","stokbarang");
-?>
+$conn = mysqli_connect("localhost", "root", "", "stokbarang");
