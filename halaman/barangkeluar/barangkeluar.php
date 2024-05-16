@@ -247,11 +247,25 @@ require "functionkeluar.php";
                                                                             required>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="penerima"
-                                                                            name="penerima">penerima</label>
-                                                                        <input type="text" name="penerima" id="penerima"
-                                                                            value="<?= $penerima; ?>" class="form-control"
-                                                                            required>
+                                                                        <select name="pelanggan" class="form-control">
+                                                                            <?php
+
+                                                                            $ambilsemuabarang = mysqli_query($conn, "SELECT * FROM pelanggan");
+                                                                            while ($fetcharray = mysqli_fetch_array($ambilsemuabarang)) {
+                                                                                $namapelanggan = $fetcharray['namapelanggan'];
+                                                                                $idpelanggan = $fetcharray['idpelanggan'];
+
+                                                                                ?>
+
+                                                                                <option value="<?= $idpelanggan; ?>">
+                                                                                    <?= $namapelanggan; ?>
+                                                                                </option>
+
+                                                                                <?php
+                                                                            }
+                                                                            ?>
+
+                                                                        </select>
                                                                     </div>
 
 
@@ -414,8 +428,25 @@ require "functionkeluar.php";
                         </div>
 
                         <div class="form-group">
-                            <input type="text" name="penerima" id="penerima" placeholder="Penerima" class="form-control"
-                                required>
+                            <select name="pelanggan" class="form-control">
+                                <?php
+
+                                $ambilsemuabarang = mysqli_query($conn, "SELECT * FROM pelanggan");
+                                while ($fetcharray = mysqli_fetch_array($ambilsemuabarang)) {
+                                    $namapelanggan = $fetcharray['namapelanggan'];
+                                    $idpelanggan = $fetcharray['idpelanggan'];
+
+                                    ?>
+
+                                    <option value="<?= $idpelanggan; ?>">
+                                        <?= $namapelanggan; ?>
+                                    </option>
+
+                                    <?php
+                                }
+                                ?>
+
+                            </select>
                         </div>
 
                         <div class="modal-footer">
