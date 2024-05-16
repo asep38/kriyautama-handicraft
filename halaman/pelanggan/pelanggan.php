@@ -193,17 +193,17 @@ require 'pelangganfunction.php';
                                                 $idpelanggan = $data['idpelanggan'];
                                                 $pelanggan = $data['namapelanggan'];
                                                 $alamat = $data['alamat'];
-                                                $notelepon = $data['notelpn'];
+                                                $telepon = $data['notelpn'];
                                             ?>
 
                                             <tr>
                                                 <td><?=$idpelanggan;?></td>
                                                 <td><?=$pelanggan;?></td>
                                                 <td><?=$alamat;?></td>
-                                                <td><?=$notelepon;?></td>
+                                                <td><?=$telepon;?></td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#ModalEdit<?=$idbarang;?>" >Edit</button>
-                                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ModalDelete<?=$idbarang;?>">delete</button>
+                                                    <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#ModalEdit<?=$idpelanggan;?>" >Edit</button>
+                                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ModalDelete<?=$idpelanggan;?>">delete</button>
                                                 </td>
                                                 
                                             </tr>
@@ -227,21 +227,21 @@ require 'pelangganfunction.php';
                                                                 
                                                                 <div class="form-group">
                                                                     <!-- keterangan barang -->
-                                                                    <input type="text" name="namabarang" id="nama-barang" value="<?=$barang;?>" class="form-control" required>
+                                                                    <input type="text" name="pelanggan" id="pelanggan" value="<?=$pelanggan;?>" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <!-- keterangan barang -->
-                                                                    <input type="number" name="stock" id="stock" value="<?=$stock;?>" class="form-control" required>
+                                                                    <input type="text" name="alamat" id="alamat" value="<?=$alamat;?>" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <!-- keterangan barang -->
-                                                                    <input type="text" name="deskripsi" id="deskripsi" value="<?=$deskripsi;?>" class="form-control" required>
+                                                                    <input type="text" name="telepon" id="telepon" value="<?=$telepon;?>" class="form-control" required>
                                                                 </div>
                                                                 
-                                                                    <input type="hidden" name="idbarang" value="<?=$idbarang;?>" >
+                                                                    <input type="hidden" name="idpelanggan" value="<?=$idpelanggan;?>" >
                                                                     
                                                                     <!-- tombol submit-->
-                                                                    <button type="submit" class="btn btn-primary" name="editpelanggan">Edit</button>
+                                                                    <button type="submit" class="btn btn-primary" name="edit">Edit</button>
                                                             </form>
 
                                                         </div>
@@ -265,14 +265,14 @@ require 'pelangganfunction.php';
 
                                                             <form method="post" action="">
 
-                                                                    Apakah Anda Yakin Ingin Menghapus <?=$barang;?> ?
+                                                                    Apakah Anda Yakin Ingin Menghapus <?=$pelanggan;?> ?
                                                                     <br>
                                                                     <br>
                                                                     <input type="hidden" name="idpelanggan" value="<?=$idpelanggan;?>" >
                                                                    
 
                                                                     <!-- tombol submit-->
-                                                                    <button type="submit" class="btn btn-danger" name="hapuspelanggan">Hapus</button>
+                                                                    <button type="submit" class="btn btn-danger" name="hapus">Hapus</button>
                                                             </form>
 
                                                         </div>
@@ -357,32 +357,32 @@ require 'pelangganfunction.php';
                 <form method="post">
 
                     <?php     
-                        $ambilsemuabarang = mysqli_query($conn,"SELECT * FROM `stock`");
+                        $ambilsemuabarang = mysqli_query($conn,"SELECT * FROM `pelanggan`");
                         while($fetcharray = mysqli_fetch_array($ambilsemuabarang)){
-                            $idbarang = $fetcharray['idbarang'];
-                            $barang = $fetcharray['namabarang'];
-                            $stock = $fetcharray['stock'];
-                            $deskripsi = $fetcharray['deskripsi'];
+                            $idpelanggan = $fetcharray['idpelanggan'];
+                            $nama = $fetcharray['namapelanggan'];
+                            $alamat = $fetcharray['alamat'];
+                            $telepon = $fetcharray['notelpn'];
                            
                         }  
                     ?>
 
                 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="namabarang" id="nama-barang" placeholder="Nama Barang" required>
+                    <input type="text" class="form-control" name="namabaru" id="namabaru" placeholder="Nama pelanggan" required>
                 </div>
 
                 <div class="form-group">
-                    <input type="number" class="form-control" name="stock" id="stock" placeholder="stok" required>
+                    <input type="text" class="form-control" name="alamatbaru" id="alamatbaru" placeholder="alamat" required>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="deskripsi" id="deskripsi" placeholder="deskripsi" required>
+                    <input type="text" class="form-control" name="teleponbaru" id="teleponbaru" placeholder="telepon" required>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="tambahproduk">Tambah</button>
+                    <button type="submit" class="btn btn-primary" name="tambah">Tambah</button>
                 </div>
                 </form>
             </div>

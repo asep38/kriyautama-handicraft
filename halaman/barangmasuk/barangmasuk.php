@@ -386,7 +386,7 @@ require 'functionmasuk.php';
                             
                                 $ambilsemuabarang = mysqli_query($conn,"SELECT * FROM pengrajin");
                                 while($fetcharray = mysqli_fetch_array($ambilsemuabarang)){
-                                    $namapengrajin = $fetcharray['Nama_Pengrajin'];
+                                    $namapengrajin = $fetcharray['nama'];
                                     $idpengrajin = $fetcharray ['idpengrajin'];
                                 
                             ?>

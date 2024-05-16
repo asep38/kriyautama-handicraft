@@ -1,89 +1,50 @@
-<?php 
+<?php
 require '../../koneksi_data.php';
 
 // ========== barang masuk start ========== //
 // menambah barang masuk
-if(isset($_POST['tambahbarangmasuk'])){
-    $pelanggan = $_POST['pelanggan'];
-    $penerima = $_POST['penerima'];
-    $qty = $_POST['qty'];
+if (isset($_POST['tambah'])) {
+    $pengrajin = $_POST['namapengrajinbaru'];
+    $telepon = $_POST['teleponbaru'];
+    $alamat = $_POST['alamatbaru'];
 
-    $cekstoksekarang = mysqli_query($conn,"SELECT * FROM pelanggan WHERE idpelanggan='$idpelanggan'");
-    $ambildata = mysqli_fetch_array($cekstoksekarang);
-
-    $stoksekarang = $ambildata['stock'];
-    $tambahstokdenganquantity = $stoksekarang + $qty;
-
-    $addtopelanggan = mysqli_query($conn,"INSERT INTO pelanggan (idpelanggan, keterangan, qty) VALUES('$barang','$penerima','$qty')");
-    $updatestokpelanggan = mysqli_query($conn,"UPDATE stock SET stock='$tambahstokdenganquantity' WHERE idpelanggan='$barang'");
-    if($addtopelanggan && $updatestokpelanggan){
-        header('location:barangpelanggan.php');
+    $addtopengrajin = mysqli_query($conn, "INSERT INTO `pengrajin`(`nama`, `alamat`, `NoTelepon`) VALUES ('$pengrajin','$alamat','$telepon')");
+    if ($addtopengrajin) {
+        header('location:pengrajin.php');
     } else {
         echo 'gagal';
-        header('location:barangpelanggan.php');
+        header('location:pengrajin.php');
     }
 }
 
-// edit data barang pelanggan
-if(isset($_POST['updatebarangpelanggan'])){
-    $idb = $_POST['idbarang'];
-    $idm = $_POST['idpelanggan'];
-    $deskripsi = $_POST['keterangan'];
-    $qty = $_POST['qty'];
 
-    $lihatstock = mysqli_query($conn,"SELECT * FROM stock WHERE idbarang='$idb'");
-    $stocknya = mysqli_fetch_array($lihatstock);
-    $stockskrg = $stocknya['stock'];
+// edit
+if (isset($_POST['edit'])) {
+    $nama = $_POST['nama'];
+    $alamat = $_POST['alamat'];
+    $telepon = $_POST['telepon'];
+    $idpengrajin = $_POST['idpengrajin'];
 
-    $qtyskrg = mysqli_query($conn,"SELECT * FROM masuk WHERE idmasuk='$idm'");
-    $qtynya = mysqli_fetch_array($qtyskrg);
-    $qtyskrg = $qtynya['qty'];
+    $editdata = mysqli_query($conn, "UPDATE `pengrajin` SET `nama`='$nama',`alamat`='$alamat',`NoTelepon`='$telepon' WHERE idpengrajin='$idpengrajin'");
 
-    if($qty>$qtyskrg){
-        $selisih = $qty - $qtyskrg;
-        $kurangin = $stockskrg + $selisih;
-        $kurangistocknya = mysqli_query($conn,"UPDATE stock SET stock='$kurangin' WHERE idbarang='$idb'");
-        $updatenya = mysqli_query($conn,"UPDATE masuk SET qty='$qty', keterangan='$deskripsi' WHERE idmasuk='$idm'");
-        
-        if ($kurangistocknya&&$updatenya){
-            header('location:barangmasuk.php');
-        } else {
-            echo 'Gagal';
-            header('location:barangmasuk.php');
-        }
+    if ($editdata) {
+        header('location:pengrajin.php');
     } else {
-        $selisih = $qtyskrg - $qty;
-        $kurangin = $stockskrg - $selisih;
-        $kurangistocknya = mysqli_query($conn,"UPDATE stock SET stock='$kurangin' WHERE idbarang='$idb'");
-        $updatenya = mysqli_query($conn,"UPDATE masuk SET qty='$qty', keterangan='$deskripsi' WHERE idmasuk='$idm'");
-        if ($kurangistocknya&&$updatenya){
-            header('location:barangmasuk.php');
-        } else {
-            echo 'Gagal';
-            header('location:barangmasuk.php');
-        }
+        header('location:pengrajin.php');
     }
 }
-
 // menghapus barang masuk
-if(isset($_POST['hapusbarangmasuk'])){
-    $idb = $_POST['idbarang'];
+if (isset($_POST['hapus'])) {
+    $nama = $_POST['namaarang'];
     $qty = $_POST['qty'];
-    $idm = $_POST['idmasuk'];
+    $idpengrajin = $_POST['idpengrajin'];
 
-    $getdatastock = mysqli_query($conn,"SELECT * FROM stock WHERE idbarang='$idb'");
-    $data = mysqli_fetch_array($getdatastock);
-    $stok = $data['stock'];
+    $hapusdata = mysqli_query($conn, "DELETE FROM pengrajin WHERE idpengrajin='$idpengrajin'");
 
-    $selisih = $stok-$qty;
-
-    $update = mysqli_query($conn,"UPDATE stock SET stock='$selisih' WHERE idbarang='$idb'");
-    $hapusdata = mysqli_query($conn,"DELETE FROM masuk WHERE idmasuk='$idm'");
-
-    if($update&&$hapusdata){
-        header('location:barangmasuk.php');
+    if ($hapusdata) {
+        header('location:pengrajin.php');
     } else {
-        header('location:barangmasuk.php');
+        header('location:pengrajin.php');
     }
 }
 ?>

@@ -1,8 +1,8 @@
-<?php 
+<?php
 require 'koneksi_data.php';
 
 // cek login
-if(isset($_POST['login'])){
+if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -12,18 +12,20 @@ if(isset($_POST['login'])){
     // hitung data
     $hitung = mysqli_num_rows($cekdatabase);
 
-    if($hitung>0){
+    if ($hitung > 0) {
         $_SESSION['log'] = 'True';
         header('location:index.php');
-    }; 
-};
+    }
+    ;
+}
+;
 
-if(!isset($_SESSION['log'])){
+if (!isset($_SESSION['log'])) {
 
 } else {
     header('location:index.php');
 }
-  
+
 
 ?>
 
@@ -72,24 +74,27 @@ if(!isset($_SESSION['log'])){
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Log In</h1>
                                     </div>
+                                    <h6>email: asep@gmail.com</h6>
+                                    <h6>pass: 321321</h6>
 
                                     <form class="user" method="post">
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address..." required>
+                                                placeholder="asep@gmail.com" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password" required>
+                                            <input type="password" name="password"
+                                                class="form-control form-control-user" id="exampleInputPassword"
+                                                placeholder="321321" required>
                                         </div>
-                                        
+
                                         <button type="submit" name="login" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
-                                        
+
                                     </form>
-                                    
+
                                 </div>
                             </div>
                         </div>

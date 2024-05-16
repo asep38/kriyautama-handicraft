@@ -191,7 +191,7 @@ require 'pengrajinfunction.php';
                                                 $idpengrajin = $data['idpengrajin'];
                                                 $namapengrajin = $data['nama'];
                                                 $alamat = $data['alamat'];
-                                                $telepon = $data['telepon'];
+                                                $telepon = $data['NoTelepon'];
                                             ?>
 
                                             <tr>
@@ -225,21 +225,21 @@ require 'pengrajinfunction.php';
                                                                 
                                                                 <div class="form-group">
                                                                     <!-- keterangan barang -->
-                                                                    <input type="text" name="namabarang" id="nama-barang" value="<?=$barang;?>" class="form-control" required>
+                                                                    <input type="text" name="nama" id="nama" value="<?=$namapengrajin;?>" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <!-- keterangan barang -->
-                                                                    <input type="number" name="stock" id="stock" value="<?=$stock;?>" class="form-control" required>
+                                                                    <input type="text" name="alamat" id="alamat" value="<?=$alamat;?>" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <!-- keterangan barang -->
-                                                                    <input type="text" name="deskripsi" id="deskripsi" value="<?=$deskripsi;?>" class="form-control" required>
+                                                                    <input type="text" name="telepon" id="telepon" value="<?=$telepon;?>" class="form-control" required>
                                                                 </div>
                                                                 
-                                                                    <input type="hidden" name="idbarang" value="<?=$idbarang;?>" >
+                                                                    <input type="hidden" name="idpengrajin" value="<?=$idpengrajin;?>" >
                                                                     
                                                                     <!-- tombol submit-->
-                                                                    <button type="submit" class="btn btn-primary" name="editpelanggan">Edit</button>
+                                                                    <button type="submit" class="btn btn-primary" name="edit">Edit</button>
                                                             </form>
 
                                                         </div>
@@ -263,14 +263,14 @@ require 'pengrajinfunction.php';
 
                                                             <form method="post" action="">
 
-                                                                    Apakah Anda Yakin Ingin Menghapus <?=$barang;?> ?
+                                                                    Apakah Anda Yakin Ingin Menghapus <?=$namapengrajin;?> ?
                                                                     <br>
                                                                     <br>
-                                                                    <input type="hidden" name="idpelanggan" value="<?=$idpelanggan;?>" >
+                                                                    <input type="hidden" name="idpengrajin" value="<?=$idpengrajin;?>" >
                                                                    
 
                                                                     <!-- tombol submit-->
-                                                                    <button type="submit" class="btn btn-danger" name="hapuspelanggan">Hapus</button>
+                                                                    <button type="submit" class="btn btn-danger" name="hapus">Hapus</button>
                                                             </form>
 
                                                         </div>
@@ -344,7 +344,7 @@ require 'pengrajinfunction.php';
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Produk</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Pengrajin</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -355,32 +355,32 @@ require 'pengrajinfunction.php';
                 <form method="post">
 
                     <?php     
-                        $ambilsemuabarang = mysqli_query($conn,"SELECT * FROM `stock`");
+                        $ambilsemuabarang = mysqli_query($conn,"SELECT * FROM `pengrajin`");
                         while($fetcharray = mysqli_fetch_array($ambilsemuabarang)){
-                            $idbarang = $fetcharray['idbarang'];
-                            $barang = $fetcharray['namabarang'];
-                            $stock = $fetcharray['stock'];
-                            $deskripsi = $fetcharray['deskripsi'];
+                            $idpengrajin = $fetcharray['idpengrajin'];
+                            $nama = $fetcharray['nama'];
+                            $alamat = $fetcharray['alamat'];
+                            $telepon = $fetcharray['NoTelepon'];
                            
                         }  
                     ?>
 
                 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="namabarang" id="nama-barang" placeholder="Nama Barang" required>
+                    <input type="text" class="form-control" name="namapengrajinbaru" id="namapengrajinbaru" placeholder="Nama pengrajin" required>
                 </div>
 
                 <div class="form-group">
-                    <input type="number" class="form-control" name="stock" id="stock" placeholder="stok" required>
+                    <input type="text" class="form-control" name="alamatbaru" id="alamatbaru" placeholder="alamat" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="teleponbaru" id="teleponbaru" placeholder="telepon" required>
                 </div>
 
-                <div class="form-group">
-                    <input type="text" class="form-control" name="deskripsi" id="deskripsi" placeholder="deskripsi" required>
-                </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="tambahproduk">Tambah</button>
+                    <button type="submit" class="btn btn-primary" name="tambah">Tambah</button>
                 </div>
                 </form>
             </div>
