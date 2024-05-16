@@ -361,7 +361,7 @@ require 'functionmasuk.php';
                     
                 <div class="form-group">
                     <!-- nama barang -->
-                        <select name="barang" class="form-control">
+                        <select name="idbarang" class="form-control">
                             <?php 
                             
                                 $ambilsemuabarang = mysqli_query($conn,"SELECT * FROM stock");
@@ -405,7 +405,7 @@ require 'functionmasuk.php';
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="penerima" id="penerima" placeholder="Keterangan" class="form-control" required>
+                    <input type="text" name="keterangan" id="keterangan" placeholder="Keterangan" class="form-control" >
                 </div>
 
                 <div class="modal-footer">
