@@ -75,6 +75,19 @@ if (isset($_POST['beli'])) {
                 </script>";
                 exit;
             }
+            // Update stok barang di tabel stock
+            $query_update_stock = "UPDATE stock SET stock = stock - ? WHERE idbarang = ?";
+            $stmt_update_stock = mysqli_prepare($conn, $query_update_stock);
+            mysqli_stmt_bind_param($stmt_update_stock, 'ii', $jumlah, $id_barang);
+            $result_update_stock = mysqli_stmt_execute($stmt_update_stock);
+
+            if (!$result_update_stock) {
+                echo "<script>
+                    window.alert('Terjadi kesalahan saat memperbarui stok barang.');
+                    window.location.href = 'penjualan.php';
+                </script>";
+                exit;
+            }
         }
 
         echo "<script>
