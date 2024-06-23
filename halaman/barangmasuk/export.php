@@ -19,9 +19,35 @@ require 'functionmasuk.php';
 </head>
 
 <body>
+    <div class="container d-flex justify-content-between mt-4">
+        <div>
+            <!-- <img src="../../img/logokriya.png" alt=""> -->
+        </div>
+        <div class="text-center">
+            <!-- <p class="uppercase">
+                Toko Kerajinan Tangan
+            </p> -->
+            <h2>
+                KRIYA UTAMA NATURAL HANDMADE
+            </h2>
+            <p>
+                Jl. Rajapolah 204, Kec. Rajapolah, Kab. Tasikmalaya, Jawa Barat 46155
+            </p>
+            <p>
+                email: utamakriya@yahoo.com / telp: 081261619094
+            </p>
+            <p>
+                __________________________________________________________________________________________________________________________________________________
+            </p>
+        </div>
+        <div>
+            <!-- <img src="assets/images/logo-smpn1.jpeg" alt=""> -->
+        </div>
+    </div>
     <div class="container">
-        <h2>Barang Masuk</h2>
-        <h4>(Inventory)</h4>
+        <h5>Laporan Barang Masuk</h5>
+        <p>tanggal : </p>
+        <button class="print-button border-none" onclick="window.print()">Cetak Halaman</button>
         <div class="data-tables datatable-dark">
 
             <table class="table table-bordered" id="mauexport" width="100%" cellspacing="0">

@@ -16,12 +16,45 @@ require 'functionkeluar.php';
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+    <style>
+        img {
+            height: 100px;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="container d-flex justify-content-between mt-4">
+        <div>
+            <!-- <img src="../../img/logokriya.png" alt=""> -->
+        </div>
+        <div class="text-center">
+            <!-- <p class="uppercase">
+                Toko Kerajinan Tangan
+            </p> -->
+            <h2>
+                KRIYA UTAMA NATURAL HANDMADE
+            </h2>
+            <p>
+                Jl. Rajapolah 204, Kec. Rajapolah, Kab. Tasikmalaya, Jawa Barat 46155
+            </p>
+            <p>
+                email: utamakriya@yahoo.com / telp: 081261619094
+            </p>
+            <p>
+                __________________________________________________________________________________________________________________________________________________
+            </p>
+        </div>
+        <div>
+            <!-- <img src="assets/images/logo-smpn1.jpeg" alt=""> -->
+        </div>
+    </div>
+
     <div class="container">
-        <h2>Barang Keluar</h2>
-        <h4>(Inventory)</h4>
+        <h5>Laporan Barang Keluar</h5>
+        <p>tanggal : </p>
+        <button class="print-button border-none" onclick="window.print()">Cetak Halaman</button>
         <div class="data-tables datatable-dark">
 
             <table class="table table-bordered" id="mauexport" width="100%" cellspacing="0">
@@ -82,14 +115,14 @@ require 'functionkeluar.php';
     </div>
 
     <script>
-        $(document).ready(function () {
-            $('#mauexport').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'excel', 'pdf', 'print'
-                ]
-            });
-        });
+        // $(document).ready(function () {
+        //     $('#mauexport').DataTable({
+        //         dom: 'Bfrtip',
+        //         buttons: [
+        //             'excel'
+        //         ]
+        //     });
+        // });
 
     </script>
 
